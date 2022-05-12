@@ -6,8 +6,8 @@
         <Dropdown
           v-model="selectedPeer"
           :options="peers"
-          optionLabel="pubKey"
-          optionValue="address"
+          option-label="pubKey"
+          option-value="address"
           placeholder="Destination"
         />
       </div>
@@ -24,24 +24,17 @@
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from "vue";
+<script setup lang="ts">
 import { useLightning } from "@/stores/lightning";
+import { ref, defineProps } from "vue";
 
-export default defineComponent({
-  props: { current: String },
-  setup(props) {
-    const store = useLightning();
-
-    let amount = ref(500000);
-    let peers = ref([]);
-    let selectedPeer = ref({});
-
-    store.$subscribe((mutation, state) => {
-      console.log(state)
-    });
-
-    return { amount, peers, selectedPeer };
-  },
+const props = defineProps({
+  current: String,
 });
+
+const store = useLightning();
+
+let amount = ref(500000);
+let peers = ref(store.nodes.filter(n => n.pubKey !== props.current));
+let selectedPeer = ref({});
 </script>
