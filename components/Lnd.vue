@@ -26,7 +26,7 @@ async function getLndInfo() {
   const parsed = JSON.parse(result);
 
   const pubKey = parsed["identity_pubkey"];
-  const address = "localhost";
+  const address = "lnd";
   const port = 9735;
 
   lnStore.add(`${pubKey}@${address}:${port}`, LNBackend.LND);

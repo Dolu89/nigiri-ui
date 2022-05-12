@@ -18,7 +18,16 @@
         ></InputNumber>
       </div>
       <div class="col-12 mb-2 lg:col-2 lg:mb-0">
-        <Button class="p-button-sm">Open</Button>
+        <Button
+          class="p-button-sm"
+          @click="
+            props.openChannel(
+              selectedPeer,
+              amount
+            )
+          "
+          >Open</Button
+        >
       </div>
     </div>
   </div>
@@ -30,11 +39,12 @@ import { ref, defineProps } from "vue";
 
 const props = defineProps({
   current: String,
+  openChannel: Function,
 });
 
 const store = useLightning();
 
 let amount = ref(500000);
-let peers = ref(store.nodes.filter(n => n.pubKey !== props.current));
+let peers = ref(store.nodes.filter((n) => n.pubKey !== props.current));
 let selectedPeer = ref({});
 </script>
