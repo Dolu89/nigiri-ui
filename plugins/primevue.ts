@@ -5,6 +5,7 @@ import Chip from 'primevue/chip';
 import Tag from 'primevue/tag';
 import Dropdown from 'primevue/dropdown';
 import InputText from 'primevue/inputtext';
+import InputNumber from 'primevue/inputnumber';
 import Textarea from 'primevue/textarea';
 import Card from 'primevue/card';
 
@@ -15,6 +16,7 @@ export default defineNuxtPlugin((nuxtApp) => {
     nuxtApp.vueApp.component('Tag', Tag);
     nuxtApp.vueApp.component('Dropdown', Dropdown);
     nuxtApp.vueApp.component('InputText', InputText);
+    nuxtApp.vueApp.component('InputNumber', InputNumber);
     nuxtApp.vueApp.component('Textarea', Textarea);
     nuxtApp.vueApp.component('Card', Card);
 });

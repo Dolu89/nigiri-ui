@@ -1,47 +1,39 @@
 <template>
-  <div>
-    <Bitcoin />
-    <div>
-      <div>LND</div>
-      <div>{{ lndInfo }}</div>
-      <div><button @click="faucetLnd()">Faucet</button></div>
+  <div class="main">
+    <div class="row">
+      <Bitcoin class="w100" />
+      <BitcoinConnect class="w100" />
+    </div>
+    <div class="row">
+      <Lnd class="w100" />
+      <Clightning class="w100" />
     </div>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import Clightning from "~~/components/Clightning.vue";
 
 export default defineComponent({
-  async setup() {
-    const { $shellExec } = useNuxtApp();
-
-    
-
-    async function getLndInfo() {
-      const result = await $shellExec(
-        "nigiridev lnd --no-tty getinfo"
-      );
-      const parsed = JSON.parse(result);
-      return {
-        pubKey: parsed["identity_pubkey"],
-        address: "localhost",
-        grpc: 10009,
-        blockHeight: parsed["block_height"],
-      };
-    }
-
-    async function faucetLnd() {
-      const result = await $shellExec("nigiri faucet lnd 0.01");
-      console.log(result);
-    }
-
-    const lndInfo = await getLndInfo();
-
-    return {
-      lndInfo,
-      faucetLnd,
-    };
-  },
+  components: { Clightning },
+  async setup() {},
 });
 </script>
+
+<style lang="scss" scoped>
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.w100 {
+  width: 100%;
+}
+
+.row {
+  display: inline-flex;
+  gap: 20px;
+}
+</style>

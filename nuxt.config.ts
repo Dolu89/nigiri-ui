@@ -8,6 +8,10 @@ export default defineNuxtConfig({
     css: [
         'primevue/resources/themes/vela-blue/theme.css',
         'primevue/resources/primevue.css',
-        'primeicons/primeicons.css'
-    ]
+        'primeicons/primeicons.css',
+        'primeflex/primeflex.css',
+    ],
+    buildModules: [
+        '@pinia/nuxt',
+    ],
 })

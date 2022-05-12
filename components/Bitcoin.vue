@@ -1,7 +1,7 @@
 <template>
   <Card>
     <template #title>
-      <h3>Bitcoin <Tag :value="`block: ${bitcoinBlock}`" severity="info" /></h3>
+      Bitcoin <Tag :value="`block: ${bitcoinBlock}`" severity="info" />
     </template>
     <template #content>
       <h3>Generate address</h3>
@@ -48,7 +48,6 @@ export default defineComponent({
     let txHex = ref("");
 
     async function getNewAddress(type: string) {
-      console.log(type);
       newAddress.value = await $shellExec(
         `nigiridev rpc getnewaddress "" ${type}`
       );
@@ -63,7 +62,6 @@ export default defineComponent({
 
     async function pushTx(txHex: string) {
       const result = await $shellExec(`nigiri push ${txHex}`);
-      console.log(result);
     }
 
     return {
