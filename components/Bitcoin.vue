@@ -28,51 +28,33 @@
   </Card>
 </template>
 
-<script lang="ts">
-import { defineComponent } from "vue";
+<script setup lang="ts">
+const { $shellExec } = useNuxtApp();
 
-export default defineComponent({
-  async setup() {
-    const { $shellExec } = useNuxtApp();
+let newAddress = ref("");
+const addressTypes = ref([
+  { name: "Legacy (P2PKH)", value: "legacy" },
+  { name: "Segwit (P2SH)", value: "p2sh-segwit" },
+  { name: "Native Segwit (P2WPKH)", value: "bech32" },
+]);
+let selectedAddressType = ref(
+  addressTypes.value.find((a) => a.value === "bech32")
+);
+let bitcoinBlock = ref(0);
+let txHex = ref("");
 
-    let newAddress = ref("");
-    const addressTypes = ref([
-      { name: "Legacy (P2PKH)", value: "legacy" },
-      { name: "Segwit (P2SH)", value: "p2sh-segwit" },
-      { name: "Native Segwit (P2WPKH)", value: "bech32" },
-    ]);
-    let selectedAddressType = ref(
-      addressTypes.value.find((a) => a.value === "bech32")
-    );
-    let bitcoinBlock = ref(0);
-    let txHex = ref("");
+async function getNewAddress(type: string) {
+  newAddress.value = await $shellExec(`nigiridev rpc getnewaddress "" ${type}`);
+}
 
-    async function getNewAddress(type: string) {
-      newAddress.value = await $shellExec(
-        `nigiridev rpc getnewaddress "" ${type}`
-      );
-    }
+async function getBitcoinLastBlock() {
+  const blockHash = await $shellExec("nigiri rpc getbestblockhash");
+  const latestBlock = await $shellExec(`nigiri rpc getblock ${blockHash}`);
+  bitcoinBlock.value = JSON.parse(latestBlock).height;
+}
+getBitcoinLastBlock();
 
-    async function getBitcoinLastBlock() {
-      const blockHash = await $shellExec("nigiri rpc getbestblockhash");
-      const latestBlock = await $shellExec(`nigiri rpc getblock ${blockHash}`);
-      bitcoinBlock.value = JSON.parse(latestBlock).height;
-    }
-    await getBitcoinLastBlock();
-
-    async function pushTx(txHex: string) {
-      const result = await $shellExec(`nigiri push ${txHex}`);
-    }
-
-    return {
-      addressTypes,
-      selectedAddressType,
-      newAddress,
-      bitcoinBlock,
-      getNewAddress,
-      txHex,
-      pushTx,
-    };
-  },
-});
+async function pushTx(txHex: string) {
+  const result = await $shellExec(`nigiri push ${txHex}`);
+}
 </script>
