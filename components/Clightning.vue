@@ -7,7 +7,7 @@
     <template #content>
       <LightningIdentity
         :pubKey="clnInfo.pubKey"
-        :address="clnInfo.address"
+        address="localhost"
         :port="clnInfo.port"
       />
       <LightningOpenChannel

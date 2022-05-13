@@ -11,7 +11,7 @@ export const useLightning = defineStore('lightning', {
         add(address: string, type: LNBackend) {
             const pubKey = address.split("@")[0];
             if (!this.nodes.find(n => n.pubKey === pubKey)) {
-                const obj = { pubKey, address, type };
+                const obj = { pubKey, externalAddress: "localhost", address, type };
                 this.nodes = [...this.nodes, obj];
             }
         },

@@ -17,10 +17,7 @@
           @click="getNewAddress(selectedAddressType.value)"
         />
       </div>
-      <div class="p-inputgroup">
-        <InputText type="text" v-model="newAddress" />
-        <Button icon="pi pi-copy" />
-      </div>
+      <UtilsCopy :value="newAddress" />
       <h3>Push TX</h3>
       <div class="p-fluid">
         <Textarea v-model="txHex" :autoResize="true" rows="5" cols="30" />
