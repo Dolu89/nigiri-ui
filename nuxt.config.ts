@@ -14,4 +14,7 @@ export default defineNuxtConfig({
     buildModules: [
         '@pinia/nuxt',
     ],
+    build: {
+        transpile: ['primevue']
+    }
 })
