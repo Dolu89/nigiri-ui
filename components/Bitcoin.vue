@@ -22,8 +22,12 @@
         <Button icon="pi pi-copy" />
       </div>
       <h3>Push TX</h3>
-      <Textarea v-model="txHex" :autoResize="true" rows="5" cols="30" />
-      <Button label="Push" @click="pushTx(txHex)" />
+      <div class="p-fluid">
+        <Textarea v-model="txHex" :autoResize="true" rows="5" cols="30" />
+      </div>
+      <div style="text-align: right">
+        <Button label="Push" @click="pushTx(txHex)" />
+      </div>
     </template>
   </Card>
 </template>
