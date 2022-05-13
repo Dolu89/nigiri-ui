@@ -69,6 +69,7 @@ async function openChannel(peerUri: string, amount: number) {
     if (listPeers.code) {
       // TODO Display error
       console.error(listPeers);
+      return;
     }
   }
 
