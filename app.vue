@@ -1,5 +1,8 @@
 <template>
   <div class="grid">
+    <div class="col-12">
+      <NigiriStatus />
+    </div>
     <div class="col-12 md:col-6">
       <Bitcoin />
     </div>
@@ -18,10 +21,5 @@
 <style>
 body {
   background-color: #18212e;
-}
-</style>
-
-<style lang="scss" scoped>
-.grid {
 }
 </style>

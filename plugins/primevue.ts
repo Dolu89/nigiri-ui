@@ -8,6 +8,7 @@ import InputText from 'primevue/inputtext';
 import InputNumber from 'primevue/inputnumber';
 import Textarea from 'primevue/textarea';
 import Card from 'primevue/card';
+import Menubar from 'primevue/menubar';
 
 export default defineNuxtPlugin((nuxtApp) => {
     nuxtApp.vueApp.use(PrimeVue);
@@ -19,4 +20,5 @@ export default defineNuxtPlugin((nuxtApp) => {
     nuxtApp.vueApp.component('InputNumber', InputNumber);
     nuxtApp.vueApp.component('Textarea', Textarea);
     nuxtApp.vueApp.component('Card', Card);
+    nuxtApp.vueApp.component('Menubar', Menubar);
 });
